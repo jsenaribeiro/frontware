@@ -1,0 +1,25 @@
+{
+   "version": "0.0.1",
+   "name": "reactly",
+   "author": "Jonathan Sena Ribeiro",
+   "description": "jsx server launcher",
+   "license": "MIT",
+   "scripts": {
+      "build": "bun run ./script/build.js",
+      "clear": "bun run ./script/reinstall.js client",
+      "patch": "bun run ./script/publish.js client patch",
+      "minor": "bun run ./script/publish.js client minor",
+      "major": "bun run ./script/publish.js client major"
+   },
+   "dependencies": {
+      "pretty-data": "latest",
+      "sitemap": "latest",
+      "jsdom": "latest",
+      "css": "latest"
+   },
+   "devDependencies": {
+      "@types/react": "latest",
+      "typescript": "latest",
+      "bun-types": "latest"
+   }
+}

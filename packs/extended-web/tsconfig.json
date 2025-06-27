@@ -1,0 +1,29 @@
+{
+   "exclude": [
+      "node_modules/", 
+      "builds/"
+   ],
+   "compilerOptions": {
+      "baseUrl": ".",
+      "jsx": "react-jsx",
+      "types": ["bun-types"],
+      "target": "esnext",
+      "module": "esnext",
+      "outDir": "./builds",
+      "rootDir": ".",
+      "strict": false,
+      "sourceMap": true,
+      "declaration": true,
+      "esModuleInterop": true,
+      "moduleDetection": "auto",
+      "moduleResolution": "bundler",
+      "emitDeclarationOnly": true,
+      "allowJs": true,
+      "composite": true,
+      "skipLibCheck": true,
+      "noImplicitAny": false,
+      "downlevelIteration": true,
+      "allowSyntheticDefaultImports": true,
+      "forceConsistentCasingInFileNames": true
+   }
+}
