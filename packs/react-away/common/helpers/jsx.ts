@@ -1,14 +1,15 @@
 import { Path } from "./path"
-import { router } from "common"
-import { StyleRule } from "handlers"
+import { StyleRule } from "importers"
 
-
-export function getComponentName(jsx: JSX<any>) {
-   if (!jsx.type) throw new Error('invalid jsx in getComponentName')
-
-   const name = jsx.type.name
-   const meta = jsx.type.metadata
-   const wrap = jsx.type.toString().match(WRAP_COMPONENT)
+export function getComponentName(jsx: JSX)
+export function getComponentName(component: Component)
+export function getComponentName(args: JSX | Component) {
+   if (typeof args != 'function') return getComponentName(args.type)
+   if (!args) throw new Error(`invalid argument in getComponentName: ${args}`)
+   
+   const name = args.name
+   const meta = args.metadata
+   const wrap = args.toString().match(WRAP_COMPONENT)
    const path = Path.from(meta.path)
 
    if (name?.trim() && name != "default") return name

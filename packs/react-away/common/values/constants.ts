@@ -1,0 +1,1 @@
+export const PRIMITIVES = ["symbol", "string", "number", "undefined", "null", "bigint"]

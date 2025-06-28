@@ -10,6 +10,9 @@ declare global {
 
       /** module of the function */
       readonly module: Module
+      
+      /** decorator information */
+      readonly context: object
 
       /** arguments and return */
       readonly signature: string
@@ -18,9 +21,14 @@ declare global {
       readonly decorators: FunctionDecorator[]
    }
 
-   interface FunctionDecorator<F = Function, C = any> {
+   interface FunctionDecorator<F = Function, I = any> {
       (module: ImportMeta, target: Function): F
-      context: C
+      information?: I
+   }
+
+   interface Decorator<P, T extends Function = Function, R extends Function = Function> {
+      (...args: any[]): (module: ImportMeta, target: T) => R
+      parameters?: P
    }
 }
 

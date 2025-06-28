@@ -9,15 +9,6 @@ export function getHandlers(type: MatchMode): JsxHandler[] {
 
 export const flow: Renderer = { children, syblings, parent }
 
-export class RenderError extends Error {
-   constructor(side: Side, public args: Params, public inner: Error) { 
-      super(`JSX render error in ${side}-side`)
-   }
-}
-
-
-
-
 /** client-side is the fallback server render 
  * turn it a fallback handler */
 export function client(jsx: JSX, url: string, ex: any) {

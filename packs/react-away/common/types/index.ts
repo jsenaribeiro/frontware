@@ -1,2 +1,2 @@
 import './react.d'
-import './error.d'
+import './render.d'

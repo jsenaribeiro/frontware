@@ -54,6 +54,11 @@ async function handler(path: string, code: string) {
       code += `\n${ini}${fn}${end};`
    }
 
+   // adding decortors in function.metadata.decorators
+   for (const [fn, ds] of Object.entries(checks.catch)) {
+      code += `\n` + ds.reduce((x, d) => x + `\n${fn}.decorators.push(${d})`, '')
+   }
+
    code += '\n\n' // adding metadata
       + extractFunctions(code, ignoreds)
          .filter(x => x.name)
