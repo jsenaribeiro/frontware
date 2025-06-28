@@ -1,7 +1,7 @@
 import { SitemapStream, streamToPromise } from "sitemap"
 import { context } from "context"
 import { pd } from 'pretty-data'
-import { Path } from 'standard'
+import { Path } from 'common'
 import * as fs from 'fs'
 
 export async function generateSiteMap() {

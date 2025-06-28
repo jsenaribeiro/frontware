@@ -29,4 +29,10 @@ Array.prototype.count = function(predicate) {
    return this.filter(predicate).length
 }
 
+Array.prototype.pipeline = function (this: any[], initial: any) {
+   if (!this.length) return initial
+   if (typeof this[0] != 'function') throw new Error('Array.pipeline is only for function array')
+   else return this.reduce((arg, fnc) => fnc(arg), initial)
+}
+
 export { }

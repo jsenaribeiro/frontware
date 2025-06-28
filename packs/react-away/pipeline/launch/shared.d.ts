@@ -12,7 +12,7 @@ declare global {
       match<T extends MatchMode = 'make'>(mode: T, handler: MakeHandler): Fluent
       match<T extends MatchMode = 'props'>(mode: T, handler: PropsHandler): Fluent
       match<T extends MatchMode = 'import'>(mode: T, handler: ImportHandler): Fluent
-      match<T extends MatchMode = 'jsx'>(mode: T, side: Side, type: JsxType, handler: JsxHandler): Fluent
+      match<T extends MatchMode = 'jsx'>(mode: T, type: JsxType, handler: JsxHandler): Fluent
       serve(buildFolder: string, routeFolder: string): Promise<void>
    }
 }

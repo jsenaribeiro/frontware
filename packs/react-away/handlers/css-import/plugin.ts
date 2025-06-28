@@ -1,6 +1,6 @@
 import { clientParseCSS } from './client'
 import { serverParseCSS } from './server'
-import { global } from "../../standard"
+import { global } from "../../common"
 
 export const cssImportPlugin: ImportHandler = plugin
 

@@ -1,19 +1,17 @@
 declare global {
-   interface RenderArgs<T=Component> {
-      id: number
-      jsx: JSX<T>
-      root: string
+   interface Params<T=any,P=any> {
+      id: number // current index tree
+      jsx: JSX<T,P> // current JSX object
+      root: string // component root tag
+      feeds: Feeds // dependency injection
+      parent: string // parent component Tag
+      earlier: any // original props before handlers
    }
 
-   interface RenderFlow {
-      parent<T=Component>(args: RenderArgs<T>): JSX<any>|JSX<any>[]
-      children<T=Component>(args: RenderArgs<T>): JSX[]
-      syblings<T=Component>(args: RenderArgs<T>): JSX[]
-
-      params(args: RenderArgs<string>): Params
-      handle(type: JsxType, args: RenderArgs): JSX<any>
-
-      client(args: RenderArgs): JSX
+   interface Renderer {
+      parent<T=any>(args: Params<T>): JSX<any>|JSX<any>[]
+      children<T=any>(args: Params<T>): JSX[]
+      syblings<T=any>(args: Params<T>): JSX[]
    }
 }
 

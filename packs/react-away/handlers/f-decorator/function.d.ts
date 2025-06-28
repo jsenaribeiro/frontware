@@ -2,7 +2,7 @@ declare global {
    interface Function { readonly metadata: MetaFunction }
 
    interface MetaFunction<C extends object = any> {
-      /** file path of */
+      /** file path of function */
       readonly path: string
 
       /** true if it is an async function  */

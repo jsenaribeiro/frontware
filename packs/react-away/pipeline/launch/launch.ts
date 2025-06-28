@@ -1,8 +1,7 @@
 /// <reference path="shared.d.ts" />
 
-import 'standard'
-import { match } from './match'
-import { global } from 'standard'
+import 'common'
+import { global } from 'common'
 import { bundler } from 'pipeline/builder'
 
 export function launch(settings: Partial<Settings>): Fluent
@@ -22,7 +21,7 @@ export function launch(args: boolean | Partial<Settings>, root?: `#${string}`, i
 
    const fluent: Fluent = { catch: _catch, match, fetch, serve }
 
-   function _catch<E extends Error, R>(handler: CatchHandler<E, R>) {
+   function _catch<E extends Error>(handler: CatchHandler<E>) {
       global.own.handlers['catch'].push(handler)
       return fluent
    }
@@ -32,7 +31,14 @@ export function launch(args: boolean | Partial<Settings>, root?: `#${string}`, i
       return fluent
    }
 
+   function match<T extends MatchMode>( mode: T, type:JsxType, handler: MatchHandler) {
+      global.own.handlers.match[mode][type] = handler
+      return fluent
+   }
+
    async function serve() {
+      global.own.is.serve = true
+
       const hasEnv = typeof args == 'boolean' ? args : args.isEnv
       const loadEnv = global.env.load
 

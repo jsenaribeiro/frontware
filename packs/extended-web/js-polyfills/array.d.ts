@@ -3,10 +3,11 @@ export {}
 declare global {
    interface Array<T> {
       distinct(): T[]
+      pairs(): [T, T][]
       first(): T | undefined
       first(predicate: (item: T) => boolean): T[keyof T] | undefined
       count(predicate: (item: T) => boolean): number
-      pairs(): [T, T][]
+      pipeline<T=any>(initial: T): T
    }
 
    interface Array<T extends [string, any]> { toObject(): object }

@@ -1,4 +1,5 @@
 export * from './css-import'
 export * from './f-decorator'
-export * from './aid-module'
-export * from './props-lib'
+export * from './new-module'
+export * from './all-props'
+export * from './all-renders'
