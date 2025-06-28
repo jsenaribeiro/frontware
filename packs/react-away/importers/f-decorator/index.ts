@@ -1,4 +1,4 @@
-import './module'
-import './function'
+import './module.d'
+import './function.d'
 
 export * from './plugin'

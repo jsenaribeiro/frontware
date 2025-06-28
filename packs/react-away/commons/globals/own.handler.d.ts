@@ -15,7 +15,7 @@ declare global {
    }
 
    interface FetchHandler extends Handler {
-      (request: Request): Request | Response
+      (request: Request): Promise<Request | Response>
    }
 
    interface MatchHandler extends Handler { }

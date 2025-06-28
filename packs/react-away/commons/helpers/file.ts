@@ -13,7 +13,7 @@ export class File extends Blob {
       name: string, options: { type?: string; lastModified?: number } = {}) {
 
       if (typeof parts === "string") super([parts], { type: options.type ?? "text/plain" });
-      
+
       else {
          const validParts = (parts as any[]).map(part => {
             if (part instanceof Uint8Array && !(part instanceof Buffer))
@@ -67,15 +67,19 @@ export class File extends Blob {
       };
 
       const mimeMap = path.toLowerCase()
-          .match(/\.([a-z0-9]+)$/)
+         .match(/\.([a-z0-9]+)$/)
          ?.map(x => x[1] && extToMime[x[1]])
          ?.at(1)
-         
+
       if (mimeMap) return mimeMap
       else text = text.trim()
 
       try { JSON.parse(text); return 'application/json' } catch { }
-      if (/<\/?[a-z][\s\S]*>/i.test(text))  return 'text/html'
+      if (/<\/?[a-z][\s\S]*>/i.test(text)) return 'text/html'
       else return 'text/plain'
+   }
+   
+   public get blob(): Blob {
+      return new Blob([this], { type: (this as any).type ?? "application/octet-stream" });
    }
 }

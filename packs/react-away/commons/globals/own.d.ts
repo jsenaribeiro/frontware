@@ -1,6 +1,7 @@
 /** @module Own reflection type */
 
-import './own.handler'
+import './own.route.d'
+import './own.handler.d'
 
 declare global {
    interface Own {
@@ -16,7 +17,7 @@ declare global {
       directories: Directories
    }   
    
-   interface Handlers extends HandleMode {
+   interface Handlers {
       catch: CatchHandler[]
       fetch: FetchHandler[]
       match: {

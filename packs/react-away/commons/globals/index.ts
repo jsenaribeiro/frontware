@@ -1,3 +1,5 @@
+import './own.d'
+
 import { env } from "./env"
 import { ioc } from "./ioc"
 import { own } from "./own"
@@ -9,11 +11,11 @@ declare global {
       /** global env file */
       env: Env
 
-      /** application reflection */
-      own: Own
-
       /** IoC container */
       ioc: IoC
+
+      /** reflection object */
+      own: Own
    }
 }
 

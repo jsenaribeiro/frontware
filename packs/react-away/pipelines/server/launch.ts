@@ -2,7 +2,7 @@
 
 import 'commons'
 import { global } from 'commons'
-import { bundler } from 'pipeline/builder'
+import { bundler } from '../builder'
 
 export function launch(settings: Partial<Settings>): Fluent
 export function launch(hasEnvFile: boolean): Fluent
@@ -42,6 +42,25 @@ export function launch(args: boolean | Partial<Settings>, root?: `#${string}`, i
 
       await loadEnv(hasEnv)
       await bundler(false)
+
+      const port = global.env.PORT || 3000
+
+      console.log(`Serving at ${global.env.PORT}`, "FG_GREEN")
+      
+      return Bun.serve({
+         port: process.env.PORT || port,
+         development: global.env.FLAGS.debug,
+         async fetch(request: Request) {
+            for (const handler of global.own.handlers.fetch) {
+               const result = await handler(request)
+               if (result instanceof Response) return result
+               else if (result instanceof Request) request = result
+               else throw new Error(`Invalid handler ${handler.name}`)
+            }
+
+            throw new Error('Not found request handler response...')
+         }
+      })
    }
 
    return fluent

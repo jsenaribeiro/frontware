@@ -1,6 +1,7 @@
 import { launch as internalLaunch } from "pipelines"
 import { bindProps, formProps, routeProps, styleProps } from "properties"
 import { cssImportPlugin, moduleMetadataPlugin, functionDecoratorPlugin } from "importers"
+import { assetsRequest, restfulRequest } from "requests"
 import {
    awaitPropsRender,
    reactivePropsRender,
@@ -12,7 +13,9 @@ import {
 
 export async function launch() {
    
-   await internalLaunch(true)
+   internalLaunch(true)
+      .fetch(assetsRequest)
+      .fetch(restfulRequest)
       .match("props", bindProps)
       .match("props", formProps)
       .match("props", routeProps)
