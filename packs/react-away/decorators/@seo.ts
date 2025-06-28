@@ -1,6 +1,6 @@
 /// <reference path="@seo.d.ts" />
 
-import { getComponentName } from "common"
+import { getComponentName } from "commons"
 
 const charsets = ["UTF-8", "UTF-16"]
 

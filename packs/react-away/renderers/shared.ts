@@ -1,4 +1,4 @@
-import { global, REACTIVE } from "common"
+import { global, REACTIVE } from "commons"
 
 const ignores = ["await", "route", "children"] as any[]
 

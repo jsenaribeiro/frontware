@@ -1,6 +1,6 @@
 "use client"
 
-import { global, router } from 'common'
+import { global, router } from 'commons'
 
 type Props = record & { route: string, link: string }
 

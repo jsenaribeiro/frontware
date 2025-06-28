@@ -1,6 +1,6 @@
 "use server"
 
-import { global } from "common"
+import { global } from "commons"
 
 type Props = record & { await: (props, params) => Promise<JSX<Component>> }
 

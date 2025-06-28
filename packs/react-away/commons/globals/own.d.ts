@@ -1,6 +1,6 @@
 /** @module Own reflection type */
 
-import './own.handler.d'
+import './own.handler'
 
 declare global {
    interface Own {

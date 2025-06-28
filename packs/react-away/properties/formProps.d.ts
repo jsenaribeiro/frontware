@@ -1,4 +1,4 @@
-import '../common'
+import '../commons'
 
 declare global {
    type OnValidateEvent = (invalids: Invalid[]) => Promise<void>

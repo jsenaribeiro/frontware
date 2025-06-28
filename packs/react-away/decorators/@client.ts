@@ -1,9 +1,9 @@
 //@ts-nocheck
 
+import '../extensions'
 import React from 'react'
 import { REACTIVE, UID } from '../constants'
 import { JSXON, getComponentName } from '../helpers'
-import '../extensions'
 
 export interface ClientDecorator { stateless: boolean, stores: object[] }
 

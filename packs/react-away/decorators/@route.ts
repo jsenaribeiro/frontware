@@ -1,4 +1,4 @@
-import { DecoratorError, RequestError } from "common";
+import { DecoratorError, RequestError } from "commons";
 
 export interface RouteDecorator { exact: boolean; route: string }
 

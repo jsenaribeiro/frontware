@@ -1,4 +1,4 @@
-import { fixKey, getTagName, global } from 'common'
+import { fixKey, getTagName, global } from 'commons'
 
 const match = global.own.handlers.match
 

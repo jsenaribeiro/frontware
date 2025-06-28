@@ -18,12 +18,7 @@ declare global {
       readonly signature: string
 
       /** related function decorators */
-      readonly decorators: FunctionDecorator[]
-   }
-
-   interface FunctionDecorator<F = Function, I = any> {
-      (module: ImportMeta, target: Function): F
-      information?: I
+      readonly decorators: Decorator[]
    }
 
    interface Decorator<P, T extends Function = Function, R extends Function = Function> {

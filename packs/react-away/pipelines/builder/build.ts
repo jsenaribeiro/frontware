@@ -2,7 +2,7 @@
 
 import { context } from 'context'
 import { generateSiteMap } from './sitemap'
-import { File, Path, global } from 'common'
+import { File, Path, global } from 'commons'
 import { buildClientSideScript } from "./client";
 import { generateRobotTxt } from "./robot";
 import { createBundle } from "./bundle";

@@ -1,9 +1,9 @@
 "use client"
 
 import React from 'react'
-import { global } from "common";
+import { global } from "commons";
 import { useProxy } from './shared'
-import { REACTIVE, STATELESS } from 'common'
+import { REACTIVE, STATELESS } from 'commons'
 
 export const reactivePropsRender: JsxHandler<'client'> = (args: Params) =>
    global.own.is.serve ? args.jsx : args.jsx.type(createReactiveProps(args), global.ioc) 

@@ -1,5 +1,5 @@
 import { context } from 'context'
-import { global } from 'common'
+import { global } from 'commons'
 
 interface TemplateArgs {
    agent: string

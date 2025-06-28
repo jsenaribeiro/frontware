@@ -1,7 +1,7 @@
 import React from "react"
 import { flow } from "./shared"
-import { global } from "common"
-import { getComponentName } from "common"
+import { global } from "commons"
+import { getComponentName } from "commons"
 import './types'
 
 export function render(root: JSX)

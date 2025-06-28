@@ -3,7 +3,7 @@
 import { SubmitEvent } from "./formProps.type";
 import { action } from "./formProps.action"
 import { validate } from "./formProps.bind"
-import { global } from 'common'
+import { global } from 'commons'
 
 /** react-away forms as form[data] and children[bind] 
  * with RESTful actions and validation api */

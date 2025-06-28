@@ -1,4 +1,4 @@
-import { getTagName, global } from "common"
+import { getTagName, global } from "commons"
 import { RenderError, SELF_CLOSE_TAGS } from "./shared"
 
 const handler = global.own.handlers.match

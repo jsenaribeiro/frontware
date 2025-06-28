@@ -1,4 +1,4 @@
-import { DecoratorError, getMillisecondsFrom, global } from "common"
+import { DecoratorError, getMillisecondsFrom, global } from "commons"
 
 export interface ServerDecorator { route: string; time: number; mode: ServerRender }
 

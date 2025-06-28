@@ -1,4 +1,4 @@
-import { global } from 'common'
+import { global } from 'commons'
 
 declare global {
    interface ProblemDetails {

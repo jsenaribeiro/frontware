@@ -1,3 +1,5 @@
+import React from 'react'
+
 declare global {
    type UseState<T = any> = [T, SetState<T>]
    type SetState<T = any> = (value: T) => void

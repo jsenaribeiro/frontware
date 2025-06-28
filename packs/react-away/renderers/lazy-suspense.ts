@@ -1,6 +1,6 @@
 "user server"
 
-import { JSXON, router } from "common"
+import { JSXON, router } from "commons"
 
 /** all symbol type is treated as fragment */
 export function lazySuspenseRender(args: Params) {

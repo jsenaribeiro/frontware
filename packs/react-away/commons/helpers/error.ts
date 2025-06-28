@@ -1,4 +1,4 @@
-import './error.d'
+import './error'
 
 export class RenderError extends Error {
    constructor(side: Side, public args: Params, public inner: Error) {

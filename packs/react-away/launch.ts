@@ -1,4 +1,4 @@
-import { launch as internalLaunch } from "pipeline/launch"
+import { launch as internalLaunch } from "pipelines"
 import { bindProps, formProps, routeProps, styleProps } from "properties"
 import { cssImportPlugin, moduleMetadataPlugin, functionDecoratorPlugin } from "importers"
 import {
@@ -6,7 +6,7 @@ import {
    reactivePropsRender,
    serverComponentRender,
    lazySuspenseRender,
-   cssImportMerge
+   cssImportStyler
 } from "renderers"
 
 
@@ -24,7 +24,7 @@ export async function launch() {
       .match("jsx", "component", reactivePropsRender)
       .match("jsx", "component", serverComponentRender)
       .match("jsx", "fragment", lazySuspenseRender)
-      .match("jsx", "element", cssImportMerge)
+      .match("jsx", "element", cssImportStyler)
    
    // request handler
    // decorators

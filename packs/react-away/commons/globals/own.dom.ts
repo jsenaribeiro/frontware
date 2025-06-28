@@ -1,4 +1,4 @@
-import "./own.d";
+import "./own";
 
 export class BrowserOwn implements Own {
    public is = is

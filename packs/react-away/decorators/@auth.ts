@@ -1,5 +1,5 @@
-import 'common'
-import { RequestError, STATUS_CODE, global } from 'common'
+import 'commons'
+import { RequestError, STATUS_CODE, global } from 'commons'
 
 const UNHANDLED_UNAUTHORIZED = 'Unhandled authorization error...'
 const DETAIL_ERROR = 'Try to access a component that requires '

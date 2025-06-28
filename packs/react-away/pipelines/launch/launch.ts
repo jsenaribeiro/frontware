@@ -1,7 +1,7 @@
 /// <reference path="shared.d.ts" />
 
-import 'common'
-import { global } from 'common'
+import 'commons'
+import { global } from 'commons'
 import { bundler } from 'pipeline/builder'
 
 export function launch(settings: Partial<Settings>): Fluent

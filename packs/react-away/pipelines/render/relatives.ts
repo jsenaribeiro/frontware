@@ -1,5 +1,5 @@
 import React from "react"
-import { fixKey, getTagName, REACTIVE } from "common"
+import { fixKey, getTagName, REACTIVE } from "commons"
 import * as client from './client'
 import { flow } from "./shared"
 

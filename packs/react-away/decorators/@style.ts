@@ -1,5 +1,5 @@
 import { serverParseCSS, StyleRule } from "importers"
-import { global } from "common";
+import { global } from "commons";
 
 export interface StyleDecorator { url: string,  styles: StyleRule[] }
 
