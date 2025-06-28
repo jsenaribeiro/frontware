@@ -1,9 +1,12 @@
-"use client"
+import { global, getModularCSS, JSXON, PRIMITIVES, router } from "common"
 
-import { getModularCSS, JSXON, PRIMITIVES, router } from "common"
+export const cssImportMerge = (args: Params) =>
+   typeof args.jsx.type != 'string' ? args.jsx
+      : global.own.is.serve ? clientStyler(args)
+      : serverStyler(args)
 
 /** apply css-import into element in client-side */
-export function clientStyler(args: Params) {
+function clientStyler(args: Params) {
    if (typeof args.jsx.type != 'string') return args.jsx
    if (global.own.is.serve) return args.jsx
 
@@ -17,15 +20,8 @@ export function clientStyler(args: Params) {
    return { ...args.jsx, props: { ...args.jsx.props, style }}
 }
 
-export function createElementFromJSX(node: JSX): HTMLElement {
-   const htmlString = JSXON.htmlfy(node)
-   const div = document.createElement('div')
-   div.innerHTML = htmlString.trim()
-   return div.firstChild as HTMLElement
-}
-
 /** apply css-import into element in server-side */
-export async function serverStyler(args: Params) {
+async function serverStyler(args: Params) {
    if (typeof args.jsx.type != 'string') return args.jsx
    if (!global.own.is.serve) return args.jsx
 
@@ -38,6 +34,13 @@ export async function serverStyler(args: Params) {
       .reduce(applyCSS, { } as object)
 
    return { ...args.jsx, props: { ...args.jsx.props, style }}
+}
+
+function createElementFromJSX(node: JSX): HTMLElement {
+   const htmlString = JSXON.htmlfy(node)
+   const div = document.createElement('div')
+   div.innerHTML = htmlString.trim()
+   return div.firstChild as HTMLElement
 }
 
 function htmlfyJSX(child: JSX<any, any>) {

@@ -1,8 +1,3 @@
-// fullstack
-
-import { StyleRule } from 'handlers'
-import { global, router } from 'common'
-
 interface SubProps { cols: string, gaps: string, grid: string, css: string }
 interface Props extends SubProps { style: SubProps & { display: string }, className: string  }
 

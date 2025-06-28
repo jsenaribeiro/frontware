@@ -1,11 +1,6 @@
-import { HTML, ChildProps } from "../typings"
-import { SubmitEvent, SubmitReturn } from "../typings"
-import { action } from "./formProps.action"
+import { SubmitEvent, SubmitReturn, HTML, ChildProps } from "./formProps.type"
 
-interface Props {
-   children?: any
-   onValidate?: Function
-}
+interface Props { children?: any; onValidate?: Function }
 
 /** form[data] for reactive rendering after submit the form  */
 export function validate(props: Props, e: SubmitEvent): SubmitReturn {

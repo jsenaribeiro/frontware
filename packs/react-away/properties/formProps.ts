@@ -1,6 +1,6 @@
 "use client"
 
-import { SubmitEvent } from "../typings"
+import { SubmitEvent } from "./formProps.type";
 import { action } from "./formProps.action"
 import { validate } from "./formProps.bind"
 import { global } from 'common'

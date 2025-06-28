@@ -1,3 +1,5 @@
+import "./own.d";
+
 export class BrowserOwn implements Own {
    public is = is
    public url = './index.html'
@@ -19,7 +21,7 @@ const is: Status = {
    build: false,
    debug: false,
    fails: false,
-   serve: false
+   get serve() { return !globalThis.document }
 }
 
 const handlers: Handlers = {

@@ -1,7 +1,7 @@
-import { ServerActionProps } from "../typings"
+import { ServerActionProps } from "./formProps.type"
 
 /** experimental authentication binding using basic authentication and jwt bearer */
-export function authenticate<T extends record = record>(props: ServerActionProps): RequestInit{
+export function authenticate(props: ServerActionProps): RequestInit{
    if (global.env.SIDE == "server") throw new Error('formProps only support client-side')
    
    const body = props.data ? JSON.stringify(props.data) : undefined

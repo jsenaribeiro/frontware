@@ -1,21 +1,14 @@
 import { launch as internalLaunch } from "pipeline/launch"
-
+import { bindProps, formProps, routeProps, styleProps } from "properties"
+import { cssImportPlugin, moduleMetadataPlugin, functionDecoratorPlugin } from "importers"
 import {
-   bindProps,
-   formProps,
-   routeProps,
-   styleProps,
    awaitPropsRender,
-   cssImportPlugin,
-   moduleMetadataPlugin,
-   functionDecoratorPlugin,
-   serverComponentRender,
    reactivePropsRender,
+   serverComponentRender,
    lazySuspenseRender,
-   clientStyler,
-   serverStyler,
-}
-from "handlers"
+   cssImportMerge
+} from "renderers"
+
 
 export async function launch() {
    
@@ -31,8 +24,7 @@ export async function launch() {
       .match("jsx", "component", reactivePropsRender)
       .match("jsx", "component", serverComponentRender)
       .match("jsx", "fragment", lazySuspenseRender)
-      .match("jsx", "element", clientStyler)
-      .match("jsx", "element", serverStyler)
+      .match("jsx", "element", cssImportMerge)
    
    // request handler
    // decorators

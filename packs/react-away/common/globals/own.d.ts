@@ -1,5 +1,7 @@
 /** @module Own reflection type */
 
+import './own.handler.d'
+
 declare global {
    interface Own {
       is: Status

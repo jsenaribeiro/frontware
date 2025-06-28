@@ -1,10 +1,11 @@
+import './formProps.d'
 import { FormEvent } from "react"
 
 export type SubmitReturn = { errors: Invalid[], inputs: HTMLInputElement[] }
 
 export type SubmitEvent = FormEvent<HTMLFormElement> & {
-   nativeEvent: { submitter: { onclick: string }}
-   target: HTMLFormElement & { elements:any }
+   nativeEvent: { submitter: { onclick: string } }
+   target: HTMLFormElement & { elements: any }
 }
 
 export interface Props<T extends object = object> {
@@ -20,13 +21,13 @@ export interface UpdateArgs {
    params: Params
    fetch?: OnFetchEvent
    submit?: OnSubmitEvent
-   props: ServerActionProps 
+   props: ServerActionProps
 }
 
 export interface ServerActionProps extends Props {
-   action?: `http://${string}`|`https://${string}`
-   format?: "formData"|"json" // default=formData
-   method?: "POST"|"PUT"|"PATCH"
+   action?: `http://${string}` | `https://${string}`
+   format?: "formData" | "json" // default=formData
+   method?: "POST" | "PUT" | "PATCH"
    bearer?: string
 }
 

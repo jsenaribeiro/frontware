@@ -4,8 +4,8 @@ import { Loader } from "bun"
 import { RenderFlow } from "pipeline/render"
 
 declare global {
-   type JsxType = "component" | "fragment" | "element"
    type HandleMode = 'catch' | 'fetch' | 'match'
+   type JsxType = "component" | "fragment" | "element"
    type MatchMode = 'jsx' | 'make' | 'props' | 'import'
 
    interface Handler { }

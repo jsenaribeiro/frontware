@@ -1,5 +1,5 @@
-import { UpdateArgs } from '../typings'
 import { authenticate, authorize } from './formProps.auth'
+import { UpdateArgs } from './formProps.type'
 
 /** Action binding sets [action] as RESTful request */
 export async function action(args: UpdateArgs) {

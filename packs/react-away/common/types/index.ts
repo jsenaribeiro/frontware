@@ -1,3 +1,2 @@
-import './react.js'
-import '../launch.js'
-import '../web-plus.js'
+import './react.d'
+import './error.d'

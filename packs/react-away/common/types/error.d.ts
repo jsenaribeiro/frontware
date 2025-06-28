@@ -9,7 +9,7 @@ declare global {
       errors?: { fieldName: string, message: string }[]
    }
 
-   export type Invalid<T = any> = { error: string, field: string, value: T }
+   export type Invalid<T = any> = { error: string, field: string, value: T }   
 }
 
 export {}

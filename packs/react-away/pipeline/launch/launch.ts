@@ -31,14 +31,12 @@ export function launch(args: boolean | Partial<Settings>, root?: `#${string}`, i
       return fluent
    }
 
-   function match<T extends MatchMode>( mode: T, type:JsxType, handler: MatchHandler) {
-      global.own.handlers.match[mode][type] = handler
+   function match( type:JsxType, handler: MatchHandler) {
+      global.own.handlers.match[type] = handler
       return fluent
    }
 
    async function serve() {
-      global.own.is.serve = true
-
       const hasEnv = typeof args == 'boolean' ? args : args.isEnv
       const loadEnv = global.env.load
 
