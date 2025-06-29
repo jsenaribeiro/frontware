@@ -24,10 +24,8 @@ function Example() {  }
 Example.path        // file path of function
 Example.async       // true if it returns Promise
 Example.module      // module host of Example function
+Example.module.use  // check if it is 'client' ou 'server'
 Example.decorators  // list all related function decorators
-
-Module.ports.exports  // all exported objects
-global.own.modules.
 ```
 
 ## function decorator

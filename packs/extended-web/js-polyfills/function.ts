@@ -1,5 +1,3 @@
-import '../declarations'
-
 (Function.prototype as any).async = function () {
    const functionString = this.toString()
    const lines = functionString.split("\n")

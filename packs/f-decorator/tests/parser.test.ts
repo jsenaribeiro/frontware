@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test"
-import { extractFunctions } from "../plugin"
+import { extractFunctions } from "../decorator"
 import { Ignore } from "../types"
 
 const oldCode = `

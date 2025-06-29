@@ -1,6 +1,6 @@
-import './own.d'
-import './own.route.d'
-import './own.handler.d'
+import './own'
+import './own.route'
+import './own.handler'
 
 import { BrowserOwn } from "./own.dom"
 

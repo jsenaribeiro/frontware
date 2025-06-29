@@ -3,6 +3,8 @@ export {}
 declare global {
    interface Array<T> {
       distinct(): T[]
+      distinct<K=any>(selector: (item: T) => K): T[];
+
       pairs(): [T, T][]
       first(): T | undefined
       first(predicate: (item: T) => boolean): T[keyof T] | undefined
