@@ -31,15 +31,16 @@ export function extractFunctions(source: string, ignore: Ignore = Ignore.None): 
       if (ignored.default && is.default) return;
       if (ignored.anonymous && (is.anonymous || name == 'anonymous')) return;
       
-      const header = getFunctionHeader(fn, src)
+      const all = getAll(fn, src)
       const args = getParameters(fn, src)
-      const signature = `${header}${args}`
-      const content = fn.body?.getText() || ''
       const index = fn.getStart(src)
-      const complete = getComplete(fn, src)
+      const header = getFunctionHeader(fn, src)
+      const content = fn.body?.getText() || ''
+      const complete = `${args} => ${content}`
+      const signature = getSignature(header, args)
       const exportation = isFunctionExported(fn)
 
-      res.push({ name, header, signature, content, index, complete, is, decorators: [], exportation });
+      res.push({ name, header, signature, content, index, all, complete, is, decorators: [], exportation });
    }
    
    function loop(node: ts.Node, flags: Flags) {
@@ -73,9 +74,13 @@ export function extractFunctions(source: string, ignore: Ignore = Ignore.None): 
 function isFunctionExported(node: ts.FunctionLikeDeclaration): boolean {
    if (!node.modifiers) return false;
    return node.modifiers.some(mod => mod.kind === ts.SyntaxKind.ExportKeyword);
- }
+}
+ 
+function getSignature(header: string, args: string) {
+   return header.replace(/\@\w+\(.*?\)\s*|\@\w+ /g, '') + args
+}
 
-function getComplete(fn: ts.FunctionLikeDeclaration, src: ts.SourceFile): string {
+function getAll(fn: ts.FunctionLikeDeclaration, src: ts.SourceFile): string {
    if (fn.name?.getText(src)) return fn.getText()
    if (!ts.isVariableDeclaration(fn.parent)) return ''
    else return fn.parent.parent.parent.getText()

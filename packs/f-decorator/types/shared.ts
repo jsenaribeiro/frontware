@@ -7,11 +7,12 @@ export interface DecoratorCode {
 
 export interface FunctionCode {
    is: Flags // ignore
+   all: string; // full ocurrence
    name: string; // function.name
    index: number; // index ocurrence in string
    header: string; // function name(args) | const name = (args)
    content: string; // { return 1 }
-   complete: string; // function name(args) { return 1 }
+   complete: string // function name(args) { } | const name = (args) => { }
    signature: string; // name(args) | name = (args)
    decorators: DecoratorCode[]
    exportation: boolean // 

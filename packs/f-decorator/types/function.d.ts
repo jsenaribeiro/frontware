@@ -9,6 +9,9 @@ declare global {
       /** module of the function */
       readonly module: Module
 
+      /** function signature */
+      readonly signature: string
+
       /** related function decorators */
       readonly decorators: IDecorator[]
    }

@@ -11,6 +11,9 @@ declare global {
       }
 
       public decorate(fn: F) {
+         if (!fn.decorators.some(x => x.name == this.name))
+            fn.decorators.push(fn)
+
          this._call = fn
          return this
       }

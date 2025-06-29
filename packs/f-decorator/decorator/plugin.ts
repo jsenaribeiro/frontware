@@ -15,13 +15,16 @@ async function handler(path: string, code: string) {
    const functions = getFunctionCodes(code)
 
    // creating module code
-   code += '\n\n const module = ' + getModuleCode(path, code) 
-
-   // transpiling annotation code
-   code += '\n\n' + functions.reduce((x, fn) => x + classDecoratorCode(fn), '')
+   code += '\n\n const module = ' + getModuleCode(path, code)
 
    // adding metadata function code
    code += '\n\n' + functions.reduce((x, fn) => x + metadataCode(fn, code, path), '')
+
+   // transpiling decorator code
+   code += '\n\n' + functions.reduce((x, fn) => x + classDecoratorCode(fn), '')
+
+   // remove all previous decorator syntax
+   code = functions.reduce((x, fn) => removePreviousDecoratorCode(fn, x), code)
 
    return { code, type: 'ts' as Loader }
 }
@@ -30,6 +33,9 @@ function getFunctionCodes(code: string) {
    // avoid failure when has no space between ')' of decorator and function 
    code = code.replace(/\)(function\**|const|let|var|export|async|default)/gm, ') $1') + '\n'
 
+   // add parentheses in parentheles decorators
+   code = code.replace(/(\@[a-z]\w+) /, `$1() `)
+
    const checks: Check = { regex: [] as any, found: null, check: null }
    const ignoreds = Ignore.Nested | Ignore.Anonymous | Ignore.Method
    const functions = extractFunctions(code, ignoreds)
@@ -37,7 +43,7 @@ function getFunctionCodes(code: string) {
    for (const fc of functions) {
       const found = fc.header.match(DECORATOR_RGX)
 
-      if (!found) console.log(0, found, fc.header, DECORATOR_RGX)
+      if (!found) console.warn(0, found, fc.header, DECORATOR_RGX)
 
       while (checks.regex = fc.header.match(DECORATOR_RGX)) {
          const [full, name, args] = checks.regex
@@ -54,7 +60,7 @@ function getFunctionCodes(code: string) {
 
 // legacy... problem with preserve states for decorator function
 function functionDecoratorCode(fn: FunctionCode): string {
-   const { name, complete, decorators, exportation } = fn;
+   const { name, all: complete, decorators, exportation } = fn;
 
    const decorated = decorators.slice().reverse().map(d => d.call || `${d.name}()`)
       .reduce((acc, dec) => `${dec}(import.meta, ${acc})`, complete.trim());
@@ -65,25 +71,27 @@ function functionDecoratorCode(fn: FunctionCode): string {
 function classDecoratorCode(func: FunctionCode): string {
    const { name, complete, decorators, exportation } = func;
 
-   // Aplica decorators com `new X(...).decorate(...)` aninhados
    const decorated = decorators.slice().reverse()
       .map(d => `new ${d.call}.decorate`)
-      .reduce((acc, fnc) => `\n${fnc}(${acc})`, complete.trim());
+      .reduce((acc, fnc) => `\n${fnc}(${acc}).call`, complete.trim());
 
    return `${exportation ? "export " : ""}const ${name} = ${decorated};`;
 } 
 
 function metadataCode(func: FunctionCode, code: string, path: string): string {
-   const getSignature = fn => fn.name.toString().split('{')[0].split('=>')[0].trim()
-
    const appendCode = `
---------${func.name}['metadata'] ||= {}
---------${func.name}['metadata']['path'] = '${path}';
---------${func.name}['metadata']['async'] = ${func.is.asynchronous};
---------${func.name}['metadata']['module'] = module;
---------${func.name}['metadata']['signature'] = ${getSignature(func)};
---------${func.name}['metadata']['decorators'] = [${func.decorators.map(x => x.name).join(',')}];`
+--------${func.name} ||= {}
+--------${func.name}['path'] = '${path}';
+--------${func.name}['async'] = ${func.is.asynchronous};
+--------${func.name}['module'] = module;
+--------${func.name}['signature'] = '${func.signature}';
+--------${func.name}['decorators'] = [];`
    
-   return appendCode.replaceAll('--------', '')
+   return appendCode.replaceAll('--------', '').trim()
+}
+
+function removePreviousDecoratorCode(func: FunctionCode, code: string) {
+   // console.log(0, func.all)
+   return code.replace(func.all, '').trim()
 }
 
