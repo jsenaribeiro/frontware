@@ -24,10 +24,10 @@ declare global {
       readonly module: Module
 
       /** related function decorators */
-      readonly decorators: Decorator[]
+      readonly decorators: IDecorator[]
    }
 
-   interface Decorator<R extends object = any, P extends object = any, F extends Function = Function> { 
+   interface IDecorator<R extends object = any, P extends object = any, F extends Function = Function> { 
       /** decorator name */
       name: string
 

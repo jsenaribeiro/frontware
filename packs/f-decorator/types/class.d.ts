@@ -1,5 +1,5 @@
 declare global {
-   abstract class FunctionDecorator<R extends object = any, P extends object = any, F extends Function = Function> implements Decorator {
+   abstract class Decorator<R extends object = any, P extends object = any, F extends Function = Function> implements IDecorator {
       public name: string
       private _call: F
       public args: P
@@ -22,13 +22,11 @@ declare global {
          }
 
          func.name = this._call.name
-
          return func
       }
 
       abstract annotation(): R
    }
-   
 }
 
 export { }
