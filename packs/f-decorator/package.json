@@ -1,0 +1,21 @@
+{
+   "version": "0.0.1",
+   "name": "f-decorator",
+   "author": "Jonathan Sena Ribeiro",
+   "description": "function decorators",
+   "license": "MIT",
+   "scripts": {
+      "build": "bun package.js build",
+      "minor": "bun package.js publish minor",
+      "major": "bun package.js publish major",
+      "patch": "bun package.js publish patch",
+      "test:debug": "bun test --inspect-brk"
+   },
+   "dependencies": {
+   },
+   "devDependencies": {
+      "@types/react": "latest",
+      "typescript": "latest",
+      "bun-types": "latest"
+   }
+}
