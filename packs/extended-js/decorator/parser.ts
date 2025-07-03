@@ -36,7 +36,7 @@ export function extractFunctions(source: string, ignore: Ignore = Ignore.None): 
       const index = fn.getStart(src)
       const header = getFunctionHeader(fn, src)
       const content = fn.body?.getText() || ''
-      const complete = `${args} => ${content}`
+      const complete = getComplete(args, content)
       const signature = getSignature(header, args)
       const exportation = isFunctionExported(fn)
 
@@ -71,13 +71,19 @@ export function extractFunctions(source: string, ignore: Ignore = Ignore.None): 
    }
 }
 
+function getComplete(args: string, body: string) {
+   args = args.includes('=') ? args.split('=')[1].trim() : args
+   return `${args} => ${body}`
+}
+
 function isFunctionExported(node: ts.FunctionLikeDeclaration): boolean {
    if (!node.modifiers) return false;
    return node.modifiers.some(mod => mod.kind === ts.SyntaxKind.ExportKeyword);
 }
  
 function getSignature(header: string, args: string) {
-   return header.replace(/\@\w+\(.*?\)\s*|\@\w+ /g, '') + args
+   const result = header.replace(/\@\w+\(.*?\)\s*|\@\w+ /g, '') + args
+   return result.replace('export ', '').trim()
 }
 
 function getAll(fn: ts.FunctionLikeDeclaration, src: ts.SourceFile): string {

@@ -5,6 +5,7 @@ declare global {
       distinct(): T[]
       distinct<K=any>(selector: (item: T) => K): T[];
 
+      clear(): void
       pairs(): [T, T][]
       first(): T | undefined
       first(predicate: (item: T) => boolean): T[keyof T] | undefined

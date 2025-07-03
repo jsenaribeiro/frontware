@@ -41,4 +41,9 @@ Array.prototype.pipeline ||= function (this: any[], initial: any) {
    else return this.reduce((arg, fnc) => fnc(arg), initial)
 }
 
+Array.prototype.clear ||= function (this:any[]) {
+   for (var i = this.length - 1; i >= 0; i--) 
+      delete this[i]
+}
+
 export { }

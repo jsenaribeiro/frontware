@@ -6,7 +6,7 @@ export class BrowserEnv implements Env {
    public ZIPPED = false
    public MINIFIED = true
    public PREFIX_URL = '/'
-   public HOSTNAME = 'http =//locahost'
+   public HOSTNAME = 'http://locahost'
    public ROBOT = []
    public SITEMAPS = []
    public load = loadEnv

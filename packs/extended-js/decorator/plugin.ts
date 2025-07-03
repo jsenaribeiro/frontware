@@ -11,20 +11,26 @@ async function handler(path: string, code: string) {
    if (!path.match(/\.[tj]s$|\.[tj]sx$/)) return undefined   
    if (!validate(code)) return undefined
 
+   // add parentheses in parentheles decorators
+   code = code.replace(/(\@[a-z]\w+) /, `$1() `)
+
    // extract functions with decorators
    const functions = getFunctionCodes(code)
+
+   // transpiling decorator code
+   code += functions.reduce((txt, fn) => txt + '\n' + classDecoratorCode(fn), '')
 
    // creating module code
    code += '\n\n const module = ' + getModuleCode(path, code)
 
    // adding metadata function code
-   code += '\n\n' + functions.reduce((x, fn) => x + metadataCode(fn, code, path), '')
-
-   // transpiling decorator code
-   code += '\n\n' + functions.reduce((x, fn) => x + classDecoratorCode(fn), '')
+   code += functions.reduce((src, fn) => src + '\n' + metadataCode(fn, code, path), '')
 
    // remove all previous decorator syntax
-   code = functions.reduce((x, fn) => removePreviousDecoratorCode(fn, x), code)
+   code = functions.reduce((src, fn) => removePreviousDecoratorCode(fn, src), code)
+
+   // remove blank new line
+   // code = code.replace(/\n\s*\n\s*\n/gm, '')
 
    return { code, type: 'ts' as Loader }
 }
@@ -32,9 +38,6 @@ async function handler(path: string, code: string) {
 function getFunctionCodes(code: string) {
    // avoid failure when has no space between ')' of decorator and function 
    code = code.replace(/\)(function\**|const|let|var|export|async|default)/gm, ') $1') + '\n'
-
-   // add parentheses in parentheles decorators
-   code = code.replace(/(\@[a-z]\w+) /, `$1() `)
 
    const checks: Check = { regex: [] as any, found: null, check: null }
    const ignoreds = Ignore.Nested | Ignore.Anonymous | Ignore.Method
@@ -73,7 +76,7 @@ function classDecoratorCode(func: FunctionCode): string {
 
    const decorated = decorators.slice().reverse()
       .map(d => `new ${d.call}.decorate`)
-      .reduce((acc, fnc) => `\n${fnc}(${acc}).call`, complete.trim());
+      .reduce((acc, fnc) => `\n${fnc}(${acc}).call`, complete);
 
    return `${exportation ? "export " : ""}const ${name} = ${decorated};`;
 } 
@@ -85,9 +88,9 @@ function metadataCode(func: FunctionCode, code: string, path: string): string {
 --------${func.name}['async'] = ${func.is.asynchronous};
 --------${func.name}['module'] = module;
 --------${func.name}['signature'] = '${func.signature}';
---------${func.name}['decorators'] = [];`
+--------${func.name}['decorators'] ||= [];`
    
-   return appendCode.replaceAll('--------', '').trim()
+   return appendCode.replaceAll('--------', '')
 }
 
 function removePreviousDecoratorCode(func: FunctionCode, code: string) {

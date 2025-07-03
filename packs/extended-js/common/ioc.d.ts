@@ -1,5 +1,3 @@
-export { }
-
 declare global {
 
    /** dependency injection object */
@@ -36,3 +34,5 @@ declare global {
       refer?: any
    }
 }
+
+export { }

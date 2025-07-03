@@ -24,7 +24,6 @@ export interface Check {
    regex: RegExpMatchArray | null
 }
 
-
 export interface Flags {
    arrow?: boolean
    nested?: boolean
@@ -41,4 +40,8 @@ export enum Ignore {
    Method = 1 << 2,
    Arrow = 1 << 3,
    Default = 1 << 4
+}
+
+export type Writable<T> = {
+   -readonly [P in keyof T]: T[P];
 }

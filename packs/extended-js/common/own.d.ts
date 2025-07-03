@@ -1,7 +1,7 @@
 /** @module Own reflection type */
 
-import './own.route'
-import './own.handler'
+import './own.route.d'
+import './own.handler.d'
 
 declare global {
    interface Own {
